@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    --fg-color: #90CAF9;
+    --fg-sec-color: #E3F2FD;
+    --bg-color: grey;
+
+    border: line 2px lime;
+}
+
+.header {
+    height: 10vh;
+    width: 100vw;
+
+    background-color: var(--fg-color);
+}
+
+.library {
+    height: 85vh;
+    width: 100vw;
+    overflow: auto;
+
+    display: grid;
+    grid-template-columns: repeat(7, .6fr);
+
+    background-color: var(--bg-color);
+}
+
+.card {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    height: 20vh;
+    width: 25vh;
+    margin: 1rem;
+}
+
+.footer {
+    height: 5vh;
+    width: 100vw;
+
+    background-color: var(--fg-sec-color);
+}
