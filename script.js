@@ -5,7 +5,8 @@ function Book(title, author, pages, readStatus) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.readFlag = readStatus;
+    this.readStatus = readStatus;
+    this.index = id;
 }
 
 function addBookToLibrary(title, author, pages, readflag) {
@@ -36,16 +37,29 @@ function displayBook(book) {
 
     let currStatus = document.createElement('p'); 
     currCard.appendChild(currStatus);
-    currStatus.innerHTML = `Status: ${book.readFlag}`;
+    currStatus.innerHTML = `Status: ${book.readStatus}`;
+
+    let statusBtn = document.createElement('button');
+    statusBtn.textContent = "Read"
+    statusBtn.classList.add(`status-btn-read-${book.index}`); 
+    if(book.readStatus == "Have read the book!") {
+        statusBtn.textContent = "Not Read!";
+        statusBtn.classList.add(`status-btn-unread-${book.index}`);
+    } 
+    statusBtn.addEventListener('click', readStatusUpdate)
+    currCard.append(statusBtn);
 
     let libraryDisplay = document.getElementsByClassName('library')[0];
     currCard.classList.add('card'); 
     libraryDisplay.appendChild(currCard);
-
 }
 
-for(let i = 0; i < 22; i++)
-    addBookToLibrary('Meditations', 'Marcus Aurelius', 173, 'have not read yet');
+function readStatusUpdate(e) {
+    console.log(e.target.classList[0].split('-')[3]);
+}
+
+for(let i = 0; i < 80; i++)
+    addBookToLibrary(`Meditations  ${i}`, 'Marcus Aurelius', 173, 'have not read yet');
 
 
 

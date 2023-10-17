@@ -4,9 +4,18 @@
 
     --fg-color: #90CAF9;
     --fg-sec-color: #E3F2FD;
-    --bg-color: grey;
+    --bg-color: #fdeee3;
 
     border: line 2px lime;
+}
+
+#add-book {
+    position: absolute;
+    height: 4rem;
+
+    fill: #2088e5;
+    left: 94vw;
+    top: 86vh;
 }
 
 .header {
@@ -22,7 +31,9 @@
     overflow: auto;
 
     display: grid;
-    grid-template-columns: repeat(7, .6fr);
+    grid-template-columns: repeat(6, 16%);
+    grid-auto-rows: 30vh;
+    justify-content: center;
 
     background-color: var(--bg-color);
 }
@@ -31,12 +42,35 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
 
-    height: 20vh;
-    width: 25vh;
+    border-radius: .5rem;
+    padding: 1rem;
     margin: 1rem;
+    box-shadow: 0px 4px 16px rgba(17,17,26,0.1), 0px 8px 24px rgba(17,17,26,0.1), 0px 16px 56px rgba(17,17,26,0.1);
+}
+
+button[class^="status-btn-read"]  {
+    height: 20%;
+    width: 50%;
+
+    background-color: #4bd3d5;
+    margin-top: auto;
+
+    border: 0;
+    border-radius: .5rem;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+button[class^="status-btn-unread"] {
+    height: 20%;
+    width: 50%;
+
+    background-color: #fd8037;
+    margin-top: auto;
+
+    border: 0;
+    border-radius: .5rem;
 }
 
 .footer {
