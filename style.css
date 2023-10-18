@@ -1,17 +1,22 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url(./assets/Poppins-Regular.ttf) format('truetype');
+}
+
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Poppins';
 
     --fg-color: #90CAF9;
     --fg-sec-color: #E3F2FD;
-    --bg-color: #fdeee3;
-
-    border: line 2px lime;
+    --bg-color: #e3f2fd;
 }
 
 #add-book {
     position: absolute;
     height: 4rem;
+    z-index: 2;
 
     fill: #2088e5;
     left: 94vw;
@@ -21,8 +26,16 @@
 .header {
     height: 10vh;
     width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     background-color: var(--fg-color);
+}
+
+h6 {
+    color: white;
+    font-size: 3rem;
 }
 
 .library {
@@ -44,26 +57,28 @@ div[class^="card"] {
     flex-direction: column;
     align-items: flex-start;
 
+    min-width: max(16%, 12rem);
+    min-height: max(10%, 12rem);
     border-radius: .5rem;
     padding: 2rem;
     margin: 1rem;
+    z-index: 0;
     box-shadow: 0px 4px 16px rgba(17, 17, 26, 0.1), 0px 8px 24px rgba(17, 17, 26, 0.1), 0px 16px 56px rgba(17, 17, 26, 0.1);
 }
 
-button[class^="status-btn-read"] {
-    height: 20%;
-    width: 50%;
-
-    background-color: #fd8037;
-    margin-top: auto;
-    align-self: center;
-
-    border: 0;
-    border-radius: .5rem;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+div[class^="card"]:hover {
+    z-index: 1;
 }
 
-button[class^="status-btn-unread"] {
+img[id^='remove-btn'] {
+    height: 1.5rem;
+    position: relative;
+    left: 98%;
+    bottom: 10%;
+    z-index: 0;
+}
+
+button[class^="status-btn"] {
     height: 20%;
     width: 50%;
 
@@ -87,6 +102,9 @@ dialog {
     position: absolute;
     margin: auto;
 
+    border: solid black 1px;
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 
@@ -97,10 +115,35 @@ dialog form {
     padding: 1rem;
 }
 
-dialog form div {
+dialog form>div {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    gap: 1rem;
+
     margin-top: 1rem;
 }
 
+dialog form span {
+    display: flex;
+    gap: 1rem;
+
+    margin-top: 1rem;
+}
+
+#add-button {
+    height: 2rem;
+    width: 4rem;
+
+    border: 0;
+    border-radius: 1rem;
+    align-self: center;
+    margin-top: 1rem;
+    background-color: var(--fg-color);
+    box-shadow: rgba(13, 38, 76, 0.19) 0px 9px 20px;
+}
+
 ::backdrop {
-    background: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(5px);
 }
