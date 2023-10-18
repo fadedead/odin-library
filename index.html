@@ -18,13 +18,41 @@
 
     <div class="footer">
     </div>
-    
+
     <svg id="add-book" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
         <path
             d="M25,2C12.317,2,2,12.317,2,25s10.317,23,23,23s23-10.317,23-23S37.683,2,25,2z M37,26H26v11h-2V26H13v-2h11V13h2v11h11V26z">
         </path>
     </svg>
-    
+
+    <dialog>
+        <form action="">
+            <legend>Enter Book</legend>
+
+            <div>
+                <label for="book-title">Title:</label>
+                <input type="text" name="book-title" id="book-title">
+            </div>
+
+            <div>
+                <label for="book-author">Author:</label>
+                <input type="text" name="book-author" id="book-author">
+            </div>
+
+            <div>
+                <label for="book-pages">Pages:</label>
+                <input type="text" name="book-pages" id="book-pages">
+            </div>
+
+            <div>
+                <input type="radio" name="book-status" id="book-read" value="read">
+                <label for="book-read">Read</label>
+                <input type="radio" name="book-status" id="book-unread" value="unread">
+                <label for="book-unread">Not read</label>
+            </div>
+
+        </form>
+    </dialog>
 </body>
 
 </html>
