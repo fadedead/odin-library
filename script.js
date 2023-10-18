@@ -10,9 +10,9 @@ function Book(title, author, pages, readStatus) {
 }
 
 function addBookToLibrary(title, author, pages, readflag) {
-    let status = "Flipping Pages";
+    let status = "Read";
     if (readflag == 0) {
-        status = "Untouched";
+        status = "Pending";
     }
 
     library[id] = new Book(title, author, pages, status);
@@ -69,12 +69,12 @@ function readStatusUpdate(e) {
     let bookId = e.target.classList[0].split('-')[2];
     let bookStaus = document.querySelector(`.card-${bookId} span:nth-child(5) p:nth-child(2)`);
 
-    if (library[bookId].readStatus == "Flipping Pages") {
-        library[bookId].readStatus = "Untouched";
+    if (library[bookId].readStatus == "Read") {
+        library[bookId].readStatus = "Pending";
         bookStaus.innerHTML = `${library[bookId].readStatus}`;
     }
     else {
-        library[bookId].readStatus = "Flipping Pages";
+        library[bookId].readStatus = "Read";
         bookStaus.innerHTML = `${library[bookId].readStatus}`;
     }
 
@@ -92,6 +92,7 @@ function addBookOnClick(e) {
     });
 
     let status = formDataObject['book-status'] == 'read' ? 1 : 0;
+    console.log(status);
 
     if (formDataObject['book-title'].length > 0 && formDataObject['book-author'].length > 0 && formDataObject['book-pages'].length > 0) {
         addBookToLibrary(formDataObject['book-title'], formDataObject['book-author'], formDataObject['book-pages'], status);
