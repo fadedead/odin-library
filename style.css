@@ -57,7 +57,7 @@ div[class^="card"] {
     flex-direction: column;
     align-items: flex-start;
 
-    min-width: max(16%, 12rem);
+    min-width: max(18%, 12rem);
     min-height: max(10%, 12rem);
     border-radius: .5rem;
     padding: 2rem;
@@ -68,6 +68,16 @@ div[class^="card"] {
 
 div[class^="card"]:hover {
     z-index: 1;
+}
+
+div[class^="card"] > p {
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+}
+
+div[class^="card"] > span:nth-child(3) > p:nth-child(2) {
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
 }
 
 img[id^='remove-btn'] {

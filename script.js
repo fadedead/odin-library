@@ -83,9 +83,10 @@ function readStatusUpdate(e) {
 function addBookOnClick(e) {
     e.preventDefault();
 
-    let bookTitle = e.target.form[1].value; 
-    let bootAuthor = e.target.form[2].value; 
-    let bookPages = e.target.form[3].value; 
+    console.log(e.target.form);
+    let bookTitle = e.target.form[0].value; 
+    let bootAuthor = e.target.form[1].value; 
+    let bookPages = e.target.form[2].value; 
     let status = document.getElementById('book-read').checked ? 1 : 0;
 
     if(bookTitle.length > 0 && bootAuthor.length > 0 && bookPages.length > 0)
