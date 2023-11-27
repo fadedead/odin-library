@@ -1,25 +1,65 @@
-const library = [];
-let id = 0;
-
-function Book(title, author, pages, readStatus) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-    this.index = id;
-}
-
-function addBookToLibrary(title, author, pages, readflag) {
-    let status = "Read";
-    if (readflag == 0) {
-        status = "Pending";
+class Library {
+    constructor() {
+        this.library = [];
+        this.id = 0;
     }
 
-    library[id] = new Book(title, author, pages, status);
-    displayBook(library[id]);
-
-    id += 1;
+    addBookToLibrary(title, author, pages, readflag) {
+        let status = "Read";
+        if (readflag == 0) {
+            status = "Pending";
+        }
+    
+        this.library[this.id] = new Book(title, author, pages, status, this.id);
+        this.library[this.id].displayBook();
+    
+        this.id += 1;
+    }
 }
+
+class Book {
+    constructor(title, author, pages, readStatus, id) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;
+        this.index = id;
+    }
+    
+    displayBook() {
+        let currCard = document.createElement('div');
+        
+        let crossImage = document.createElement("img");
+        crossImage.src = "./assets/cross.svg";
+        crossImage.alt = "remove";
+        crossImage.id = `remove-btn-${this.index}`;
+        crossImage.addEventListener('click', removeBookOnClick);
+        currCard.appendChild(crossImage);
+        
+        let currName = document.createElement('p');
+        currCard.appendChild(currName);
+        currName.innerHTML = `${this.title}`;
+        currName.style = "font-weight:700; font-size:1.1rem;";
+        
+        currCard.appendChild(createLabelElement('Author:', this.author));
+        currCard.appendChild(createLabelElement('Pages:', this.pages));
+        currCard.appendChild(createLabelElement('Status:', this.readStatus));
+        
+        let statusBtn = document.createElement('button');
+        statusBtn.textContent = "change status";
+        statusBtn.classList.add(`status-btn-${this.index}`);
+        
+        statusBtn.addEventListener('click', readStatusUpdate)
+        currCard.append(statusBtn);
+        
+        let libraryDisplay = document.getElementsByClassName('library')[0];
+        currCard.classList.add(`card-${this.index}`);
+        libraryDisplay.appendChild(currCard);
+    }
+}
+
+const lib = new Library();
+
 
 function createLabelElement(label, content) {
     let currSpan = document.createElement('span');
@@ -34,36 +74,7 @@ function createLabelElement(label, content) {
     return currSpan;
 }
 
-function displayBook(book) {
-    let currCard = document.createElement('div');
 
-    let crossImage = document.createElement("img");
-    crossImage.src = "./assets/cross.svg";
-    crossImage.alt = "remove";
-    crossImage.id = `remove-btn-${book.index}`;
-    crossImage.addEventListener('click', removeBookOnClick);
-    currCard.appendChild(crossImage);
-
-    let currName = document.createElement('p');
-    currCard.appendChild(currName);
-    currName.innerHTML = `${book.title}`;
-    currName.style = "font-weight:700; font-size:1.1rem;";
-
-    currCard.appendChild(createLabelElement('Author:', book.author));
-    currCard.appendChild(createLabelElement('Pages:', book.pages));
-    currCard.appendChild(createLabelElement('Status:', book.readStatus));
-
-    let statusBtn = document.createElement('button');
-    statusBtn.textContent = "change status";
-    statusBtn.classList.add(`status-btn-${book.index}`);
-
-    statusBtn.addEventListener('click', readStatusUpdate)
-    currCard.append(statusBtn);
-
-    let libraryDisplay = document.getElementsByClassName('library')[0];
-    currCard.classList.add(`card-${book.index}`);
-    libraryDisplay.appendChild(currCard);
-}
 
 function readStatusUpdate(e) {
     let bookId = e.target.classList[0].split('-')[2];
@@ -95,7 +106,7 @@ function addBookOnClick(e) {
     console.log(status);
 
     if (formDataObject['book-title'].length > 0 && formDataObject['book-author'].length > 0 && formDataObject['book-pages'].length > 0) {
-        addBookToLibrary(formDataObject['book-title'], formDataObject['book-author'], formDataObject['book-pages'], status);
+        lib.addBookToLibrary(formDataObject['book-title'], formDataObject['book-author'], formDataObject['book-pages'], status);
         e.srcElement.form.reset();
         dialog.close();
     }
@@ -120,12 +131,12 @@ addButton.addEventListener('click', () => {
 const addBookButton = document.getElementById('add-button');
 addBookButton.addEventListener('click', addBookOnClick);
 
-function addSampleBook() {
-    addBookToLibrary('Sample Book 1', 'Sample Author 1', 69, 'Flipping Pages');
-    addBookToLibrary('Sample Book 2', 'Sample Author 2', 420, 'Untouched');
-    addBookToLibrary('Sample Book 3', 'Sample Author 3', 26, 'Flipping Pages');
-    addBookToLibrary('Sample Book 4', 'Sample Author 4', 8, 'Untouched');
-    addBookToLibrary('Sample Book 5', 'Sample Author 5', 2000, 'Flipping Pages');
+function addSampleBook(library) {
+    library.addBookToLibrary('Sample Book 1', 'Sample Author 1', 69, 'Flipping Pages');
+    library.addBookToLibrary('Sample Book 2', 'Sample Author 2', 420, 'Untouched');
+    library.addBookToLibrary('Sample Book 3', 'Sample Author 3', 26, 'Flipping Pages');
+    library.addBookToLibrary('Sample Book 4', 'Sample Author 4', 8, 'Untouched');
+    library.addBookToLibrary('Sample Book 5', 'Sample Author 5', 2000, 'Flipping Pages');
 }
 
-addSampleBook();
+addSampleBook(lib);
